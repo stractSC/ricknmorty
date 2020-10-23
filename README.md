@@ -75,22 +75,34 @@ Follow: https://helm.sh/docs/intro/install/
 ### kubectl
 Follow: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 ## How to deploy
-Follow instructions in :
+#### Follow instructions in :
+
+##### Start and setup minikube env
 ```
-#Start and setup minikube env
 minikube start
 minikube addons enable ingress
 cd helm/
-##### -> Please edit values.yaml file as necessary.
-# Install helm chart - deployment, service and ingress reosurces.
+```
+##### Edit values.yaml file as necessary
+```
+vi values.yaml
+```
+##### Install helm chart - deployment, service and ingress reosurces
+```
 helm upgrade --install ricknmorty helm/ -f helm/values.yaml
-# View deployed service , ip-address and port
+```
+##### View deployed service , ip-address and port
+```
 minikube service list
 minikube service ricknmorty --url
-# Navigate to service to validate app is alive
+```
+##### Navigate to service to validate app is alive
+```
 curl $(minikube service ricknmorty --url)/healthcheck
-# Navigate to service to get json results
+```
+##### Navigate to service to get json results
+```
 curl $(minikube service ricknmorty --url)/get_results
 ```
 
-### End
+# End
