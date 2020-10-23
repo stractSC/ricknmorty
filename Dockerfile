@@ -1,16 +1,21 @@
 FROM python:3.8
 
-# set the working directory in the container
+MAINTAINER netanelkoli@gmail.com
+
+# Set the working directory in the container
 WORKDIR /code
 
-# copy the dependencies file to the working directory
+# Copy the dependencies file to the working directory
 COPY requirements.txt .
 
-# install dependencies
+# Install dependencies
 RUN pip install -r requirements.txt
 
-# copy the content of the local src directory to the working directory
+# Copy the content of the local src directory to the working directory
 COPY ricknmorty.py .
 
-# command to run on container start
+# Listen on this port for incoming connections
+EXPOSE 5000
+
+# Command to run on container start
 CMD [ "python", "./ricknmorty.py" ]
