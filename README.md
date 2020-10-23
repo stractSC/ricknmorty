@@ -10,18 +10,14 @@
 
 **Table of Contents**
 
-[TOCM]
-
-[TOC]
-
-#Python App
+# Python App
 Python webapp to parse a json respinse from rickandmortyapi.com and parse it to a csv file.
 Here I used pandas to parse from json to csv and from csv to json.
-##RIck and Morty API
+## RIck and Morty API
 API DOC can be found here:
 https://rickandmortyapi.com/documentation/#introduction
-##Main functions
-###main()
+## Main functions
+### main()
 Main function of the app. Runs before staring the webapp server.
 Its role is to fetch a response from ```url = "https://rickandmortyapi.com/api/character/?Species=Human&status=alive&origin=earth"``` , validate its a valid json , and save it to local storage as a csv. In case any of the functions fails or gets an exception, the app with exit with ```sys.exit(1)``` exit code 1.
 ```
@@ -34,17 +30,17 @@ def main():
         print("Couldn't fetch a valid json response and convert is to CSV. Exiting...")
         sys.exit(1)
 ```
-###app.run()
+### app.run()
 Main loop of the wepapp server. It serves on port 5000, for all network interfaces.
-##API Calls
-###/healthcheck
+## API Calls
+### /healthcheck
 Returns ```200``` http response with the body `Healthy!`
-###/get_results
+### /get_results
 Returns a valid json response, after it parses the local .csv file to json using pandas.
-#Dockerizig Python App
-##Build
+# Dockerizig Python App
+## Build
 Includes a `build.sh` bash script. Please run `chmod u+x build.sh` for later use.
-###Prerequisite
+### Prerequisite
 Create a dockerhub.conf file in the same directory. build.sh script is using it to have proper credentials to login to your dockerhub account. Structure of this file:
 ```
 #----------------dockerhub.conf template-----------#
@@ -53,7 +49,7 @@ export DOCKERHUB_PASSWORD=<password>
 #--------------------------------------------------#
 ```
 In addition, the relevant repo should exist in your https://hub.docker.com/ account.
-###Building
+### Building
 After configurating dockerhub.conf file,  you can run `./build.sh`. This script will:
 - Docker build the python app, to create a new docker image using the `Dockerfile` in the repo.
 - Install all pip packages.
@@ -63,22 +59,22 @@ After configurating dockerhub.conf file,  you can run `./build.sh`. This script 
 - Push the image to dockerhub repo.
 - Logout from dockerhub.
 
-#Kubernetes (Minikube)
+# Kubernetes (Minikube)
 ![](https://kubernetes.io/images/favicon.png)
 
-##Content
+## Content
 This repo includes:
 - Helm chart in order to deploy the image into a k8s cluster.
 - For more info about helm or kubernetes please visit: https://helm.sh/, https://kubernetes.io/.
 
-##Prerequisite (Minikube)
-###Install Minikube cluster on local station
+## Prerequisite (Minikube)
+### Install Minikube cluster on local station
 Follow: https://github.com/kubernetes/minikube
-###Helm3
+### Helm3
 Follow: https://helm.sh/docs/intro/install/
-###kubectl
+### kubectl
 Follow: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-##How to deploy
+## How to deploy
 Follow instructions in :
 ```
 #Start and setup minikube env
@@ -97,4 +93,4 @@ curl $(minikube service ricknmorty --url)/healthcheck
 curl $(minikube service ricknmorty --url)/get_results
 ```
 
-###End
+### End
