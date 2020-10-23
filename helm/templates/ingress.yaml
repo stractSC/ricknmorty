@@ -3,16 +3,17 @@ kind: Ingress
 metadata:
   name: "{{ .Chart.Name }}-ingress"
   namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host:
-      http:
+    - http:
         paths:
           - backend:
               serviceName: {{ .Chart.Name }}
-              servicePort: 80
+              servicePort: 5000
             path: /healthcheck
           - backend:
               serviceName: {{ .Chart.Name }}
-              servicePort: 80
+              servicePort: 5000
             path: /get_results
